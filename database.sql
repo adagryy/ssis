@@ -10,20 +10,20 @@ CREATE TABLE ARTISTS(
 	artist_id INT NOT NULL
 		CONSTRAINT pk_artists PRIMARY KEY (artist_id),
 	name varchar(60) NOT NULL
-);
+)
 
 CREATE TABLE YEARS(
 	year_id INT NOT NULL
 		CONSTRAINT pk_years PRIMARY KEY(year_id),
 	production_year INT NOT NULL
-);
+)
 
 CREATE TABLE RECORDINGS(
 	record_id INT NOT NULL
 		CONSTRAINT pk_records PRIMARY KEY (record_id),
 	year_id INT NOT NULL FOREIGN KEY REFERENCES YEARS (year_id),
 	artist_id INT NOT NULL FOREIGN KEY REFERENCES ARTISTS (artist_id)
-);
+)
 
 CREATE TABLE SONGS(
 	song_id INT NOT NULL 
@@ -31,7 +31,7 @@ CREATE TABLE SONGS(
 	title varchar(60),
 	lyrics TEXT NOT NULL,
 	record_id INT NOT NULL FOREIGN KEY REFERENCES RECORDINGS(record_id)
-);
+)
 
 CREATE TABLE USR(
 	db_user_id int not null identity
@@ -39,8 +39,7 @@ CREATE TABLE USR(
 	email nvarchar(100) NULL,
 	_admin bit not null default 0
 )
-CREATE TABLE IMP
-(
+CREATE TABLE IMP(
 	imp_id int not null IDENTITY CONSTRAINT PK_imp PRIMARY KEY, 
 	start_dt datetime NOT NULL DEFAULT GETDATE(),
 	end_dt datetime NULL /* jak nie null to sie zakonczyl */,
@@ -55,7 +54,7 @@ CREATE TABLE LOG_table(
 	step_name nvarchar(100) null,
     row_id int not null identity 
 		CONSTRAINT PK_LOG PRIMARY KEY,
-		entry_dt datetime not null DEFAULT GETDATE()
+	entry_dt datetime not null DEFAULT GETDATE()
 )
 
 CREATE TABLE IMPORTES_ROWS(
@@ -69,4 +68,32 @@ CREATE TABLE IMPORTES_ROWS(
 	lyrics TEXT NOT NULL
 )
 
-select * from IMPORTES_ROWS
+CREATE TABLE TMP(
+	name varchar(60) not null, 
+	production_year INT NOT NULL,
+	title varchar(60),
+	lyrics varchar(500) NOT NULL
+)
+
+
+insert into imp default values
+select * from TMP
+select * from LOG_table
+select SCOPE_IDENTITY(), name, production_year, title, lyrics from TMP
+select *from IMPORTES_ROWS
+insert into IMPORTES_ROWS (imp_id, name, production_year, title, lyrics) select SCOPE_IDENTITY(), name, production_year, title, lyrics from TMP
+
+use recording_studio_db
+go
+CREATE PROCEDURE rewrite_from_TMP_to_IMPORTED 
+AS
+	INSERT INTO IMP DEFAULT VALUES
+	INSERT INTO LOG_table (msg, proc_name, step_name) VALUES ('Transferring data to imported...', 'Success', 'Row')
+
+GO
+
+DROP PROCEDURE rewrite_from_TMP_to_IMPORTED
+
+EXEC rewrite_from_TMP_to_IMPORTED
+
+select * FROM LOG_table

@@ -1,0 +1,935 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/6/2016 10:17:42 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-OL26LND"
+  DTS:CreatorName="DESKTOP-OL26LND\Adam"
+  DTS:Description="SSIS Package Description"
+  DTS:DTSID="{3E0AC5F3-A435-4AAC-83A5-9C1B99EE7019}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.1100.286"
+  DTS:LocaleID="2057"
+  DTS:MaxErrorCount="0"
+  DTS:ObjectName="SSIS_Package"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{8E0A1B50-D881-429A-8BD7-A8E32D96027F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[data.txt]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{C1544753-CA1B-4D4B-BF69-E9B610BCC2CC}"
+      DTS:ObjectName="data.txt">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\Users\Adam\Desktop\SSIS_project\data.txt" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DestinationConnectionOLEDB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E404AE05-8DB5-47B0-B180-B4B69D1A85C0}"
+      DTS:ObjectName="DestinationConnectionOLEDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DESKTOP-OL26LND;User ID=pw_db;Initial Catalog=recording_studio_db;Provider=SQLNCLI11;Auto Translate=false;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAUHiOqHVlSEevWo7k2voA/QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACYh+6arHHHbeUyLziFPaJGo9hlAaSWeEnvDa+IhL8PSwAAAAAOgAAAAAIAACAAAABPd4mSPsVJtyoEJDkitNrbksdqUesLbkWT+M2fEf1dWRAAAAAuEAXG8Y/xzYTTm4FBAL18QAAAAESFdrS9A9RYKFOVinIueG6tEZtjKubSgOuj4LRjvbxIKV8io0jDIaS4+eIerNgvTQsIXeIHz+jNqbotwEKcFAM</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SourceConnectionFlatFile]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{E82CEF7B-1DCD-4203-A12D-C885AD120DF1}"
+      DTS:ObjectName="SourceConnectionFlatFile">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="2057"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Users\Adam\Desktop\SSIS_project\data.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Nazwa_artysty"
+              DTS:DTSID="{F3804FE9-ED32-4CFB-8244-2E28B51187DC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Rok_premiery"
+              DTS:DTSID="{E64BC2D9-F197-4FD4-887C-33C058964EFD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="tytul"
+              DTS:DTSID="{030AB039-7046-40E0-8FB8-437E282D2B19}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="tekst"
+              DTS:DTSID="{961B513B-DC00-4F55-B309-8D3075C3D7B8}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Clear TMP Table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0B5A51BE-340D-48AD-A38A-D8BDC48CDD8A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Clear TMP Table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 RC0; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E404AE05-8DB5-47B0-B180-B4B69D1A85C0}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE TMP" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Rename file"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{B4FA0BD1-E03D-4815-AF3B-0458C98CFFFB}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Rename file"
+      DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2016 RC0; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="RenameFile"
+          TaskSourcePath="{C1544753-CA1B-4D4B-BF69-E9B610BCC2CC}"
+          TaskDestinationPath="{E82CEF7B-1DCD-4203-A12D-C885AD120DF1}" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Rewrite to IMPORTED_ROWS"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{36852879-D7CB-4384-BFCC-25F699A2BE8B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Rewrite to IMPORTED_ROWS"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 RC0; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E404AE05-8DB5-47B0-B180-B4B69D1A85C0}"
+          SQLTask:SqlStatementSource="EXEC rewrite_from_TMP_to_IMPORTED" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Save to log"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2CFBD6DD-CEA4-4933-8C36-78DD9188917E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Save to log"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 RC0; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E404AE05-8DB5-47B0-B180-B4B69D1A85C0}"
+          SQLTask:SqlStatementSource="INSERT INTO LOG_table (msg, proc_name, step_name) VALUES ('Operation finished', 'Status: ended', '-')" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Start"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{328AEA54-E1B0-4813-82F9-124E5FF5CC68}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Start"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 RC0; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E404AE05-8DB5-47B0-B180-B4B69D1A85C0}"
+          SQLTask:SqlStatementSource="INSERT INTO LOG_table (msg, proc_name, step_name) VALUES ('Loading started', 'Status: success', '-')" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Transfer data to TMP table"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{63B4DA86-3BC4-4894-9D47-0DF1B8EC46B5}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Transfer data to TMP table"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          defaultBufferSize="3145728"
+          version="1">
+          <components>
+            <component
+              refId="Package\Transfer data to TMP table\Data Conversion 0 - 0"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion 0 - 0"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Transfer data to TMP table\Data Conversion 0 - 0.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Transfer data to TMP table\Data Conversion 0 - 0.Inputs[Data Conversion Input].Columns[Rok_premiery]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Rok_premiery"
+                      lineageId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output].Columns[Rok_premiery]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Transfer data to TMP table\Data Conversion 0 - 0.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Transfer data to TMP table\Data Conversion 0 - 0.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transfer data to TMP table\Data Conversion 0 - 0.Outputs[Data Conversion Output].Columns[Rok_premiery]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Transfer data to TMP table\Data Conversion 0 - 0.Outputs[Data Conversion Output].Columns[Rok_premiery]"
+                      name="Rok_premiery"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output].Columns[Rok_premiery]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Transfer data to TMP table\Data Conversion 0 - 0.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Transfer data to TMP table\Data Conversion 0 - 0.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transfer data to TMP table\Data Conversion 0 - 0.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Transfer data to TMP table\Data Conversion 0 - 0.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Transfer data to TMP table\Data Conversion 0 - 0.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Transfer data to TMP table\Data Conversion 0 - 0.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Transfer data to TMP table\Destination - TMP"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Destination - TMP"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[TMP]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Transfer data to TMP table\Destination - TMP.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DestinationConnectionOLEDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[DestinationConnectionOLEDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Transfer data to TMP table\Destination - TMP.Inputs[Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Transfer data to TMP table\Destination - TMP.Inputs[Destination Input].Columns[Nazwa_artysty]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Nazwa_artysty"
+                      externalMetadataColumnId="Package\Transfer data to TMP table\Destination - TMP.Inputs[Destination Input].ExternalColumns[name]"
+                      lineageId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output].Columns[Nazwa_artysty]" />
+                    <inputColumn
+                      refId="Package\Transfer data to TMP table\Destination - TMP.Inputs[Destination Input].Columns[Rok_premiery]"
+                      cachedDataType="i4"
+                      cachedName="Rok_premiery"
+                      externalMetadataColumnId="Package\Transfer data to TMP table\Destination - TMP.Inputs[Destination Input].ExternalColumns[production_year]"
+                      lineageId="Package\Transfer data to TMP table\Data Conversion 0 - 0.Outputs[Data Conversion Output].Columns[Rok_premiery]" />
+                    <inputColumn
+                      refId="Package\Transfer data to TMP table\Destination - TMP.Inputs[Destination Input].Columns[tytul]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="tytul"
+                      externalMetadataColumnId="Package\Transfer data to TMP table\Destination - TMP.Inputs[Destination Input].ExternalColumns[title]"
+                      lineageId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output].Columns[tytul]" />
+                    <inputColumn
+                      refId="Package\Transfer data to TMP table\Destination - TMP.Inputs[Destination Input].Columns[tekst]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="tekst"
+                      externalMetadataColumnId="Package\Transfer data to TMP table\Destination - TMP.Inputs[Destination Input].ExternalColumns[lyrics]"
+                      lineageId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output].Columns[tekst]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Transfer data to TMP table\Destination - TMP.Inputs[Destination Input].ExternalColumns[name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="60"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer data to TMP table\Destination - TMP.Inputs[Destination Input].ExternalColumns[production_year]"
+                      dataType="i4"
+                      name="production_year" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer data to TMP table\Destination - TMP.Inputs[Destination Input].ExternalColumns[title]"
+                      codePage="1252"
+                      dataType="str"
+                      length="60"
+                      name="title" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer data to TMP table\Destination - TMP.Inputs[Destination Input].ExternalColumns[lyrics]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="lyrics" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Transfer data to TMP table\Destination - TMP.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Transfer data to TMP table\Destination - TMP.Inputs[Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transfer data to TMP table\Destination - TMP.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Transfer data to TMP table\Destination - TMP.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Transfer data to TMP table\Destination - TMP.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Transfer data to TMP table\Destination - TMP.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Transfer data to TMP table\Source - data_txt"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="2057"
+              name="Source - data_txt"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Transfer data to TMP table\Source - data_txt.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SourceConnectionFlatFile]"
+                  connectionManagerRefId="Package.ConnectionManagers[SourceConnectionFlatFile]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output].Columns[Nazwa_artysty]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output].ExternalColumns[Nazwa_artysty]"
+                      length="50"
+                      lineageId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output].Columns[Nazwa_artysty]"
+                      name="Nazwa_artysty"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output].Columns[Rok_premiery]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output].ExternalColumns[Rok_premiery]"
+                      length="50"
+                      lineageId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output].Columns[Rok_premiery]"
+                      name="Rok_premiery"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output].Columns[tytul]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output].ExternalColumns[tytul]"
+                      length="50"
+                      lineageId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output].Columns[tytul]"
+                      name="tytul"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output].Columns[tekst]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output].ExternalColumns[tekst]"
+                      length="500"
+                      lineageId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output].Columns[tekst]"
+                      name="tekst"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output].ExternalColumns[Nazwa_artysty]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Nazwa_artysty" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output].ExternalColumns[Rok_premiery]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Rok_premiery" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output].ExternalColumns[tytul]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="tytul" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output].ExternalColumns[tekst]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="tekst" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Transfer data to TMP table.Paths[Data Conversion Output]"
+              endId="Package\Transfer data to TMP table\Destination - TMP.Inputs[Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Transfer data to TMP table\Data Conversion 0 - 0.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Transfer data to TMP table.Paths[Flat File Source Output]"
+              endId="Package\Transfer data to TMP table\Data Conversion 0 - 0.Inputs[Data Conversion Input]"
+              name="Flat File Source Output"
+              startId="Package\Transfer data to TMP table\Source - data_txt.Outputs[Flat File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{BFC542C8-90B5-4EC8-91D7-362672B4B7EE}"
+      DTS:From="Package\Clear TMP Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Transfer data to TMP table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{2B169BCD-D547-4F03-8679-146139540B09}"
+      DTS:From="Package\Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Clear TMP Table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{557CC010-A65D-4E3F-84C5-A18490D7A176}"
+      DTS:From="Package\Transfer data to TMP table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Rewrite to IMPORTED_ROWS" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{C19FDEB8-1531-49A9-A2C8-9129BE791942}"
+      DTS:From="Package\Rewrite to IMPORTED_ROWS"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Rename file" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{95A73577-7C5C-412C-9797-C9E71FA52F2E}"
+      DTS:From="Package\Rename file"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Save to log" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="205,42"
+          Id="Package\Transfer data to TMP table"
+          TopLeft="362.5,197.5" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Clear TMP Table"
+          TopLeft="396,111" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="474,153">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-9,44.5"
+              Start="0,0"
+              End="-9,37">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.25"
+                    Point2="0,22.25"
+                    Point3="-4,22.25" />
+                  <mssgle:LineSegment
+                    End="-5,22.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-5,22.25"
+                    Point2="-9,22.25"
+                    Point3="-9,26.25" />
+                  <mssgle:LineSegment
+                    End="-9,37" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="102,42"
+          Id="Package\Start"
+          TopLeft="424,41" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="474.5,83">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="218,42"
+          Id="Package\Rewrite to IMPORTED_ROWS"
+          TopLeft="364,292" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="465,239.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8,52.5"
+              Start="0,0"
+              End="8,45">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.25"
+                    Point2="0,26.25"
+                    Point3="4,26.25" />
+                  <mssgle:LineSegment
+                    End="4,26.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4,26.25"
+                    Point2="8,26.25"
+                    Point3="8,30.25" />
+                  <mssgle:LineSegment
+                    End="8,45" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="135,42"
+          Id="Package\Rename file"
+          TopLeft="452,403" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="473,334">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="58,69"
+              Start="0,0"
+              End="58,61.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.5"
+                    Point2="0,34.5"
+                    Point3="4,34.5" />
+                  <mssgle:LineSegment
+                    End="54,34.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="54,34.5"
+                    Point2="58,34.5"
+                    Point3="58,38.5" />
+                  <mssgle:LineSegment
+                    End="58,61.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Save to log"
+          TopLeft="417,512" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="531,445">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-32.5,67"
+              Start="0,0"
+              End="-32.5,59.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.5"
+                    Point2="0,33.5"
+                    Point3="-4,33.5" />
+                  <mssgle:LineSegment
+                    End="-28.5,33.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-28.5,33.5"
+                    Point2="-32.5,33.5"
+                    Point3="-32.5,37.5" />
+                  <mssgle:LineSegment
+                    End="-32.5,59.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Transfer data to TMP table">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Transfer data to TMP table\Destination - TMP"
+          TopLeft="15,209.5" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Transfer data to TMP table\Data Conversion 0 - 0"
+          TopLeft="5.50000000000003,107.5" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Transfer data to TMP table\Source - data_txt"
+          TopLeft="16,5.5" />
+        <EdgeLayout
+          Id="Package\Transfer data to TMP table.Paths[Data Conversion Output]"
+          TopLeft="96.5,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transfer data to TMP table.Paths[Flat File Source Output]"
+          TopLeft="96.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
