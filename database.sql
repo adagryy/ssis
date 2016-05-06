@@ -76,24 +76,31 @@ CREATE TABLE TMP(
 )
 
 
-insert into imp default values
 select * from TMP
+select * from IMP
 select * from LOG_table
+select *from IMPORTES_ROWS
 select SCOPE_IDENTITY(), name, production_year, title, lyrics from TMP
 select *from IMPORTES_ROWS
+insert into imp default values
 insert into IMPORTES_ROWS (imp_id, name, production_year, title, lyrics) select SCOPE_IDENTITY(), name, production_year, title, lyrics from TMP
 
 use recording_studio_db
 go
 CREATE PROCEDURE rewrite_from_TMP_to_IMPORTED 
 AS
-	INSERT INTO IMP DEFAULT VALUES
-	INSERT INTO LOG_table (msg, proc_name, step_name) VALUES ('Transferring data to imported...', 'Success', 'Row')
-
+	INSERT INTO LOG_table (msg, proc_name, step_name) VALUES ('Transferring data to imported_rows started...', 'Success', 'Row');
+	INSERT INTO IMP DEFAULT VALUES;
+	INSERT INTO IMPORTES_ROWS (imp_id, name, production_year, title, lyrics) SELECT SCOPE_IDENTITY(), name, production_year, title, lyrics FROM TMP;
+	INSERT INTO LOG_table (msg, proc_name, step_name) VALUES ('Transferring data to imported_rows finished...', 'Success', 'Row');
 GO
 
 DROP PROCEDURE rewrite_from_TMP_to_IMPORTED
+TRUNCATE TABLE LOG_table
+TRUNCATE TABLE IMPORTES_ROWS
+TRUNCATE TABLE IMP
 
 EXEC rewrite_from_TMP_to_IMPORTED
+go
 
 select * FROM LOG_table
