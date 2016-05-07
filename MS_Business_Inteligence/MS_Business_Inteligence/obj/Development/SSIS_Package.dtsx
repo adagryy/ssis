@@ -12,8 +12,8 @@
   DTS:LocaleID="2057"
   DTS:MaxErrorCount="0"
   DTS:ObjectName="SSIS_Package"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{A9CF9E2B-B07A-4FD4-9ED3-5411DCD50512}">
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{ED6D74A2-7983-4973-AC80-7B231E58F95B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -38,7 +38,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAUHiOqHVlSEevWo7k2voA/QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACZ6lPet8FrL4yLLIZ2yn+wMEuM4jh2ReyfrfIH7R+t5AAAAAAOgAAAAAIAACAAAACjXqqpCGGK+ayCT/JEiNEFUM2VSfxqhkc0CC3yLSmqnBAAAAAEJdaBCIg5eIuKgcV1OyRCQAAAAGYxH2QvMgEaFW93IieqWuAxOFyZC+a+mgXRQ5mdh3UZopNZcvF0KtJcSdhttxRfH333tj7mUebYvyFKvJXHmhI</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAUHiOqHVlSEevWo7k2voA/QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACmxeUFp7Ue2va6o+wqB98C6MJmrddj3YHp9djpjfdPzwAAAAAOgAAAAAIAACAAAAAv/HWHOZ+bvzUzA3iozyQBpXhVjJa0eujrT0ojGTwc0hAAAAAZDyUe+Pl2e0Ml/kEcJO6zQAAAABOS0EOWsM8Pt7hNsVa9u7ZyOQ2GN0rL0EvyEly6vCUmD8UyXS0628LbZOmfNN+bK6hEGceabNWPIghIoHwGKME</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -102,12 +102,30 @@
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
+      DTS:DTSID="{57D7D25D-EB18-4BCA-A197-A915F0F748E6}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileExistsFlg">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
       DTS:DTSID="{293687FF-EEB4-46E8-8BDA-CD2FC46B9A39}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
-      DTS:ObjectName="Copy">
+      DTS:ObjectName="FileName">
       <DTS:VariableValue
-        DTS:DataType="8">c:\bak</DTS:VariableValue>
+        DTS:DataType="8">data.txt</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4F04BEA2-DF2F-4EDE-BE9C-56F7627C83B1}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FolderPath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Users\Adam\Desktop\SSIS_project</DTS:VariableValue>
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
@@ -693,7 +711,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{BFC542C8-90B5-4EC8-91D7-362672B4B7EE}"
+      DTS:DTSID="{92C5F1F4-6454-4EEF-A3F6-B0D30781E5FB}"
       DTS:From="Package\Clear TMP Table"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
@@ -770,7 +788,19 @@
         <NodeLayout
           Size="156,42"
           Id="Package\Clear TMP Table"
-          TopLeft="396,111" />
+          TopLeft="369.076923076923,91" />
+        <NodeLayout
+          Size="235,42"
+          Id="Package\Data processing ended (Logging)"
+          TopLeft="121.666666666667,610" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Data processing started (Logging)"
+          TopLeft="224.545454545455,393.636363636364" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Process input data"
+          TopLeft="152.727272727273,505.454545454546" />
         <NodeLayout
           Size="135,42"
           Id="Package\Rename file"
@@ -786,59 +816,25 @@
         <NodeLayout
           Size="102,42"
           Id="Package\Start"
-          TopLeft="424,41" />
+          TopLeft="390.153846153846,20.2307692307692" />
         <NodeLayout
           Size="205,42"
           Id="Package\Transfer data to TMP table"
           TopLeft="362.5,197.5" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="474,153">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-9,44.5"
-              Start="0,0"
-              End="-9,37">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,18.25" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,18.25"
-                    Point2="0,22.25"
-                    Point3="-4,22.25" />
-                  <mssgle:LineSegment
-                    End="-5,22.25" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-5,22.25"
-                    Point2="-9,22.25"
-                    Point3="-9,26.25" />
-                  <mssgle:LineSegment
-                    End="-9,37" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="474.5,83">
+          TopLeft="444.115384615385,62.2307692307692">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,28"
+              EndConnector="0,28.7692307692308"
               Start="0,0"
-              End="0,20.5">
+              End="0,21.2692307692308">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,20.5" />
+                    End="0,21.2692307692308" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -949,14 +945,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="166,42"
-          Id="Package\Process input data"
-          TopLeft="152.727272727273,505.454545454546" />
-        <NodeLayout
-          Size="163,42"
-          Id="Package\Data processing started (Logging)"
-          TopLeft="224.545454545455,393.636363636364" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
           TopLeft="438,334">
@@ -1025,10 +1013,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="235,42"
-          Id="Package\Data processing ended (Logging)"
-          TopLeft="121.666666666667,610" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 7]"
           TopLeft="237.44696969697,547.454545454546">
@@ -1051,6 +1035,40 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="447.076923076923,133">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="17.9230769230768,64.5"
+              Start="0,0"
+              End="17.9230769230768,57">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.25"
+                    Point2="0,32.25"
+                    Point3="4,32.25" />
+                  <mssgle:LineSegment
+                    End="13.9230769230768,32.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="13.9230769230768,32.25"
+                    Point2="17.9230769230768,32.25"
+                    Point3="17.9230769230768,36.25" />
+                  <mssgle:LineSegment
+                    End="17.9230769230768,57" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -1058,7 +1076,7 @@
     design-time-name="Package\Transfer data to TMP table">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="163,42"
           Id="Package\Transfer data to TMP table\Destination - TMP"
@@ -1090,9 +1108,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -1114,9 +1130,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

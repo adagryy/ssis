@@ -64,6 +64,12 @@ CREATE TABLE TMP(
 	lyrics varchar(500) NOT NULL
 )
 
+CREATE TABLE PARAMETR(
+	value_id INT NOT NULL identity 
+		CONSTRAINT pk PRIMARY KEY,
+	errors INT NOT NULL DEFAULT 0
+)
+
 use recording_studio_db
 
 
@@ -135,7 +141,7 @@ AS
 							BEGIN 
 								UPDATE IMPORTED_ROWS SET import_status = 'Duplicated' WHERE row_id = @I
 								INSERT INTO LOG_table(msg, proc_name, step_name) VALUES ('Master_id updated', 'Processing', 'Updating')
-								INSERT INTO LOG_table(msg, proc_name, step_name) VALUES ('Error - duplicate found', 'Processing', 'Saving')
+								INSERT INTO LOG_table(msg, proc_name, step_name) VALUES ('ERROR - duplicate found', 'Processing', 'Saving')
 							END
 						--====================
 					END
@@ -163,7 +169,7 @@ AS
 							ELSE
 							BEGIN 
 								UPDATE IMPORTED_ROWS SET import_status = 'Duplicated' WHERE row_id = @I
-								INSERT INTO LOG_table(msg, proc_name, step_name) VALUES ('Error - duplicate found', 'Processing', 'Saving')
+								INSERT INTO LOG_table(msg, proc_name, step_name) VALUES ('ERROR - duplicate found', 'Processing', 'Saving')
 							END
 						--====================
 					END				
@@ -182,10 +188,10 @@ select * from IMP
 select * from LOG_table
 select * from IMPORTED_ROWS
 
-select * FROM LOG_table
-
+select * from RECORDINGS
 select * from SONGS
 
+select * FROM LOG_table
 --SELECT  
 DROP PROCEDURE process_data
 --DROP PROCEDURE rewrite_from_TMP_to_IMPORTED
@@ -196,30 +202,48 @@ use recording_studio_db
 EXEC process_data
 go
 
-TRUNCATE TABLE IMPORTED_ROWS
-TRUNCATE TABLE LOG_table
--- UPDATE IMPORTED_ROWS SET master_id=4 WHERE name = 'Adele'
 
--- 		IF (	SELECT s.title 
--- 					FROM SONGS s
--- 					JOIN RECORDINGS r ON r.record_id = s.song_id
--- 					JOIN IMPORTED_ROWS ir ON ir.master_id = r.record_id 
--- 					WHERE s.title = ir.title
--- 				) IS NULL
--- 			BEGIN				
--- 				INSERT INTO SONGS (title, lyrics, record_id) VALUES (
--- 				(SELECT title FROM IMPORTED_ROWS WHERE row_id = @I ),
--- 				(SELECT lyrics FROM IMPORTED_ROWS WHERE row_id = @I ),
--- 				(SELECT title FROM IMPORTED_ROWS WHERE row_id = @I )
--- 				)
--- 			END
+sp_configure 'show advanced options', 1;
+GO
+RECONFIGURE;
+GO
+sp_configure 'Ole Automation Procedures', 1;
+GO
+RECONFIGURE;
+GO
 
--- 		IF(
--- 			SELECT r.year_of_record, r.artist_name FROM RECORDINGS r
--- 			JOIN IMPORTED_ROWS ir2 ON ir2.master_id = r.record_id
--- 			WHERE r.year_of_record = ir2.production_year AND (r.artist_name = ir2.name)
--- 		) IS NULL
--- 		BEGIN
--- 			INSERT INTO RECORDINGS (year_of_record, artist_name) VALUES ((SELECT production_year FROM IMPORTED_ROWS WHERE row_id = @I), (SELECT name FROM IMPORTED_ROWS WHERE row_id = @I))
--- 			UPDATE IMPORTED_ROWS SET master_id = (SELECT IDENT_CURRENT('RECORDINGS')) WHERE row_id = @I
+EXEC msdb.dbo.sysmail_add_account_sp
+    @account_name = 'SendEmailSqlDemoAccount'
+  , @description = 'Sending SMTP mails to users'
+  , @email_address = 'heo2pu@gmail.com'
+  , @display_name = 'Adam Gryczka'
+  , @replyto_address = 'heo2pu@gmail.com'
+  , @mailserver_name = 'smtp.gmail.com'
+  , @port = 587
+  , @username = 'heo2pu@gmail.com'
+  , @password = ''
+  , @enable_ssl = 1
+Go
 
+
+EXEC msdb.dbo.sp_send_dbmail
+    @profile_name = 'Error_notification'
+  , @recipients = 'deleter1234@interia.eu'
+  , @subject = 'Ostrzezenie'
+  , @body = 'Blad przy 2-krotnym wczytywaniu pliku'
+  , @importance ='HIGH' 
+GO
+
+create procedure ssdd
+as
+	EXEC msdb.dbo.sp_send_dbmail
+		@profile_name = 'Error_notification'
+	  , @recipients = 'deleter1234@interia.eu'
+	  , @subject = 'Ostrzezenie'
+	  , @body = 'Blad przy 2-krotnym wczytywaniu pliku'
+	  , @importance ='HIGH' 
+	GO
+go
+
+DROP PROCEDURE ssdd
+exec ssdd
