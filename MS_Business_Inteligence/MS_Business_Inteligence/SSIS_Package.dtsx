@@ -12,8 +12,8 @@
   DTS:LocaleID="2057"
   DTS:MaxErrorCount="0"
   DTS:ObjectName="SSIS_Package"
-  DTS:VersionBuild="2"
-  DTS:VersionGUID="{8E0A1B50-D881-429A-8BD7-A8E32D96027F}">
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{A9CF9E2B-B07A-4FD4-9ED3-5411DCD50512}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -38,7 +38,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAUHiOqHVlSEevWo7k2voA/QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADRMVvRmJ+gDRa7LMxsnlGv8rRB8Y9A+wtJGckHuAZa1QAAAAAOgAAAAAIAACAAAADLuKLt4/k/zLgcHP1XaM/HXOTf5V9FQmj1+2wMEeAf+BAAAADGoPbiWOI2YAVUF4tUmtv0QAAAALSiYQUofmhPRCi1UQP0Cwe+Pt4mDH1dYxu4tDXl5PZVpcd/SRJBivB3C8tzfdr8IdII1xbX1n6/fG5pqUc1hU4</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAUHiOqHVlSEevWo7k2voA/QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACem4Y1ZkKbRgoshYPLwSGV4/OyqT5LSiTo/nGEDpjj0gAAAAAOgAAAAAIAACAAAACQbP9gR9FR0ojMo8EDBaAv38GznPfonwWBn/9KuwfaixAAAABjk+R1prvmNIDOgVtU1q//QAAAAHOyUB+98dCImJL7i0N01UUoUFo2VN6fb5GZeoKJTEySXwXlZcL5Sa6+bs6clHeYd9+NG90V6XAxYe/Sxw32d9U</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -99,7 +99,17 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
-  <DTS:Variables />
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{293687FF-EEB4-46E8-8BDA-CD2FC46B9A39}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Copy">
+      <DTS:VariableValue
+        DTS:DataType="8">c:\bak</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
       DTS:refId="Package\Clear TMP Table"
@@ -119,6 +129,57 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\Data processing ended (Logging)"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C7E3CA66-1E9E-45DD-9404-1B57222E1541}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data processing ended (Logging)"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 RC0; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E404AE05-8DB5-47B0-B180-B4B69D1A85C0}"
+          SQLTask:SqlStatementSource="INSERT INTO LOG_table (msg, proc_name, step_name) VALUES ('Processing has been ended', 'Processing', 'End')" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Data processing started (Logging)"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B0EDEC82-DBCA-4B88-8F2D-9F8BBA713A28}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data processing started (Logging)"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 RC0; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E404AE05-8DB5-47B0-B180-B4B69D1A85C0}"
+          SQLTask:SqlStatementSource="INSERT INTO LOG_table(msg, proc_name, step_name) VALUES ('Data processing started', 'Processing', 'Beginning')" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Process input data"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C209FDAB-FB0C-4895-8B2E-A696307885BC}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Process input data"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 RC0; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E404AE05-8DB5-47B0-B180-B4B69D1A85C0}"
+          SQLTask:SqlStatementSource="EXEC process_data" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\Rename file"
       DTS:CreationName="Microsoft.FileSystemTask"
       DTS:Description="File System Task"
@@ -127,12 +188,12 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Rename file"
       DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2016 RC0; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <FileSystemData
           TaskOperationType="RenameFile"
-          TaskSourcePath="{C1544753-CA1B-4D4B-BF69-E9B610BCC2CC}"
+          TaskSourcePath="{E82CEF7B-1DCD-4203-A12D-C885AD120DF1}"
           TaskDestinationPath="{E82CEF7B-1DCD-4203-A12D-C885AD120DF1}" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -162,12 +223,12 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Save to log"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016 RC0; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{E404AE05-8DB5-47B0-B180-B4B69D1A85C0}"
-          SQLTask:SqlStatementSource="INSERT INTO LOG_table (msg, proc_name, step_name) VALUES ('Operation finished', 'Status: ended', '-')" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="INSERT INTO LOG_table (msg, proc_name, step_name) VALUES ('Renaming file finished', 'Status: ended', '-')" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -669,6 +730,30 @@
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 4"
       DTS:To="Package\Save to log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{F6A4E913-550F-41AD-8051-38790C1B07A7}"
+      DTS:From="Package\Rewrite to IMPORTED_ROWS"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Data processing started (Logging)" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{DC793F99-41F2-4ECA-B682-0411D32397FF}"
+      DTS:From="Package\Data processing started (Logging)"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Process input data" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{C12309A7-68C9-459A-B978-300855D6F528}"
+      DTS:From="Package\Process input data"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\Data processing ended (Logging)" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -681,15 +766,31 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="205,42"
-          Id="Package\Transfer data to TMP table"
-          TopLeft="362.5,197.5" />
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="156,42"
           Id="Package\Clear TMP Table"
           TopLeft="396,111" />
+        <NodeLayout
+          Size="135,42"
+          Id="Package\Rename file"
+          TopLeft="584.727272727273,398.454545454546" />
+        <NodeLayout
+          Size="218,42"
+          Id="Package\Rewrite to IMPORTED_ROWS"
+          TopLeft="364,292" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Save to log"
+          TopLeft="696.090909090909,551.090909090909" />
+        <NodeLayout
+          Size="102,42"
+          Id="Package\Start"
+          TopLeft="424,41" />
+        <NodeLayout
+          Size="205,42"
+          Id="Package\Transfer data to TMP table"
+          TopLeft="362.5,197.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="474,153">
@@ -724,10 +825,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="102,42"
-          Id="Package\Start"
-          TopLeft="424,41" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="474.5,83">
@@ -750,10 +847,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="218,42"
-          Id="Package\Rewrite to IMPORTED_ROWS"
-          TopLeft="364,292" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="465,239.5">
@@ -788,36 +881,66 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="135,42"
-          Id="Package\Rename file"
-          TopLeft="452,403" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="473,334">
+          TopLeft="508,334">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="58,69"
+              EndConnector="144.227272727273,64.4545454545455"
               Start="0,0"
-              End="58,61.5">
+              End="144.227272727273,56.9545454545455">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,30.5" />
+                    End="0,22.0635866865375" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,30.5"
-                    Point2="0,34.5"
-                    Point3="4,34.5" />
+                    Point1="0,22.0635866865375"
+                    Point2="0,26.0635866865375"
+                    Point3="4,26.0635866865375" />
                   <mssgle:LineSegment
-                    End="54,34.5" />
+                    End="140.227272727273,26.0635866865375" />
                   <mssgle:CubicBezierSegment
-                    Point1="54,34.5"
-                    Point2="58,34.5"
-                    Point3="58,38.5" />
+                    Point1="140.227272727273,26.0635866865375"
+                    Point2="144.227272727273,26.0635866865375"
+                    Point3="144.227272727273,30.0635866865375" />
                   <mssgle:LineSegment
-                    End="58,61.5" />
+                    End="144.227272727273,56.9545454545455" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="652.227272727273,440.454545454546">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="125.363636363636,110.636363636364"
+              Start="0,0"
+              End="125.363636363636,103.136363636364">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.3181818181818" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,51.3181818181818"
+                    Point2="0,55.3181818181818"
+                    Point3="4,55.3181818181818" />
+                  <mssgle:LineSegment
+                    End="121.363636363636,55.3181818181818" />
+                  <mssgle:CubicBezierSegment
+                    Point1="121.363636363636,55.3181818181818"
+                    Point2="125.363636363636,55.3181818181818"
+                    Point3="125.363636363636,59.3181818181818" />
+                  <mssgle:LineSegment
+                    End="125.363636363636,103.136363636364" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -827,35 +950,99 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <NodeLayout
+          Size="166,42"
+          Id="Package\Process input data"
+          TopLeft="152.727272727273,505.454545454546" />
+        <NodeLayout
           Size="163,42"
-          Id="Package\Save to log"
-          TopLeft="417,512" />
+          Id="Package\Data processing started (Logging)"
+          TopLeft="224.545454545455,393.636363636364" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="531,445">
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="438,334">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-32.5,67"
+              EndConnector="-131.954545454545,59.6363636363636"
               Start="0,0"
-              End="-32.5,59.5">
+              End="-131.954545454545,52.1363636363636">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,29.5" />
+                    End="0,20.1152508693492" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,29.5"
-                    Point2="0,33.5"
-                    Point3="-4,33.5" />
+                    Point1="0,20.1152508693492"
+                    Point2="0,24.1152508693492"
+                    Point3="-4,24.1152508693492" />
                   <mssgle:LineSegment
-                    End="-28.5,33.5" />
+                    End="-127.954545454545,24.1152508693492" />
                   <mssgle:CubicBezierSegment
-                    Point1="-28.5,33.5"
-                    Point2="-32.5,33.5"
-                    Point3="-32.5,37.5" />
+                    Point1="-127.954545454545,24.1152508693492"
+                    Point2="-131.954545454545,24.1152508693492"
+                    Point3="-131.954545454545,28.1152508693492" />
                   <mssgle:LineSegment
-                    End="-32.5,59.5" />
+                    End="-131.954545454545,52.1363636363636" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="306.045454545455,435.636363636364">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-70.3181818181819,69.8181818181819"
+              Start="0,0"
+              End="-70.3181818181819,62.3181818181819">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.9090909090909" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.9090909090909"
+                    Point2="0,34.9090909090909"
+                    Point3="-4,34.9090909090909" />
+                  <mssgle:LineSegment
+                    End="-66.3181818181819,34.9090909090909" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-66.3181818181819,34.9090909090909"
+                    Point2="-70.3181818181819,34.9090909090909"
+                    Point3="-70.3181818181819,38.9090909090909" />
+                  <mssgle:LineSegment
+                    End="-70.3181818181819,62.3181818181819" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="235,42"
+          Id="Package\Data processing ended (Logging)"
+          TopLeft="121.666666666667,610" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="237.44696969697,547.454545454546">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,62.5454545454546"
+              Start="0,0"
+              End="0,55.0454545454546">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,55.0454545454546" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -871,7 +1058,7 @@
     design-time-name="Package\Transfer data to TMP table">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="163,42"
           Id="Package\Transfer data to TMP table\Destination - TMP"
@@ -903,7 +1090,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -925,7 +1114,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
