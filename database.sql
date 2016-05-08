@@ -180,7 +180,6 @@ AS
 		END
 GO
 
-DROP PROCEDURE error_handler
 sp_configure 'show advanced options', 1;
 GO
 RECONFIGURE;
@@ -195,7 +194,7 @@ EXEC msdb.dbo.sysmail_add_profile_sp
       @description = 'Sending emails to admins'
 GO
 
-
+select * from IMPORTED_ROWS 
 EXEC msdb.dbo.sysmail_add_account_sp
     @account_name = 'SendEmailSqlDemoAccount'
   , @description = 'Sending SMTP mails to users'
@@ -226,3 +225,8 @@ as
 	  , @importance ='HIGH' 
 	GO
 go
+
+
+SELECT * FROM LOG_table
+SELECT * FROM RECORDINGS
+SELECT * FROM PARAMETR
