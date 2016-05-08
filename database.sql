@@ -21,13 +21,6 @@ CREATE TABLE SONGS(
 	record_id INT NOT NULL FOREIGN KEY REFERENCES RECORDINGS(record_id)
 )
 
-CREATE TABLE USR(
-	db_user_id int not null identity
-		constraint pk_usr primary key,
-	email nvarchar(100) NULL,
-	_admin bit not null default 0
-)
-
 CREATE TABLE IMP(
 	imp_id int not null IDENTITY CONSTRAINT PK_imp PRIMARY KEY, 
 	start_dt datetime NOT NULL DEFAULT GETDATE(),
@@ -70,16 +63,8 @@ CREATE TABLE PARAMETR(
 	errors INT NOT NULL DEFAULT 0
 )
 
-use recording_studio_db
+INSERT INTO PARAMETR(errors) VALUES(0)
 
-
-select SCOPE_IDENTITY(), name, production_year, title, lyrics from TMP
-select *from IMPORTED_ROWS
-insert into imp default values
-insert into IMPORTED_ROWS (imp_id, name, production_year, title, lyrics) select SCOPE_IDENTITY(), name, production_year, title, lyrics from TMP
-
-use recording_studio_db
-go
 CREATE PROCEDURE rewrite_from_TMP_to_IMPORTED 
 AS
 	INSERT INTO LOG_table (msg, proc_name, step_name) VALUES ('Transferring data to imported_rows started...', 'Success', 'Rewriting');
@@ -181,28 +166,21 @@ AS
 	UPDATE imp SET end_dt = GETDATE() WHERE end_dt IS NULL
 GO
 
-use recording_studio_db
-select * from RECORDINGS
-select * from TMP
-select * from IMP
-select * from LOG_table
-select * from IMPORTED_ROWS
+CREATE PROCEDURE error_handler
+AS
+	INSERT INTO LOG_table(msg, proc_name, step_name) VALUES ('Fatal error occured', 'Loading data', 'Interrupting application')
+	UPDATE PARAMETR SET errors = errors + 1 WHERE value_id=1
+	IF (
+		SELECT errors FROM PARAMETR WHERE value_id=1
+		) = 5
+		BEGIN
+			UPDATE PARAMETR SET errors = 0 WHERE value_id=1
+			exec ssdd
+			INSERT INTO LOG_table(msg, proc_name, step_name) VALUES ('ERROR mail has been sent', 'Loading data', 'Email')
+		END
+GO
 
-select * from RECORDINGS
-select * from SONGS
-
-select * FROM LOG_table
---SELECT  
-DROP PROCEDURE process_data
---DROP PROCEDURE rewrite_from_TMP_to_IMPORTED
-EXEC sp_MSForEachTable "DELETE FROM ?"
-
-EXEC rewrite_from_TMP_to_IMPORTED
-use recording_studio_db
-EXEC process_data
-go
-
-
+DROP PROCEDURE error_handler
 sp_configure 'show advanced options', 1;
 GO
 RECONFIGURE;
@@ -211,6 +189,12 @@ sp_configure 'Ole Automation Procedures', 1;
 GO
 RECONFIGURE;
 GO
+
+EXEC msdb.dbo.sysmail_add_profile_sp
+      @profile_name = 'Error notification',
+      @description = 'Sending emails to admins'
+GO
+
 
 EXEC msdb.dbo.sysmail_add_account_sp
     @account_name = 'SendEmailSqlDemoAccount'
@@ -226,24 +210,19 @@ EXEC msdb.dbo.sysmail_add_account_sp
 Go
 
 
-EXEC msdb.dbo.sp_send_dbmail
-    @profile_name = 'Error_notification'
-  , @recipients = 'deleter1234@interia.eu'
-  , @subject = 'Ostrzezenie'
-  , @body = 'Blad przy 2-krotnym wczytywaniu pliku'
-  , @importance ='HIGH' 
-GO
+EXEC msdb.dbo.sysmail_add_profileaccount_sp 
+    @profile_name = 'Error notification',
+    @account_name = 'SendEmailSqlDemoAccount',
+    @sequence_number = 1
+GO 
 
 create procedure ssdd
 as
 	EXEC msdb.dbo.sp_send_dbmail
-		@profile_name = 'Error_notification'
+		@profile_name = 'Error notification'
 	  , @recipients = 'deleter1234@interia.eu'
 	  , @subject = 'Ostrzezenie'
-	  , @body = 'Blad przy 2-krotnym wczytywaniu pliku'
+	  , @body = 'Blad przy 5-krotnym wczytywaniu pliku'
 	  , @importance ='HIGH' 
 	GO
 go
-
-DROP PROCEDURE ssdd
-exec ssdd
